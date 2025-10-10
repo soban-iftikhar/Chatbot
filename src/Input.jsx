@@ -17,9 +17,15 @@ const Input = ({ onSubmit }) => {
     }
   }
 
+  function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      handelSubmit(event);
+    }
+  }
+
   return (
     <>
-      <div className="input-container">
+      <div className="input-wrapper">
         <label htmlFor="user-input"></label>
         <input
           type="text"
@@ -27,9 +33,12 @@ const Input = ({ onSubmit }) => {
           placeholder="Type your message here..."
           value={inputValue}
           onChange={getInputValue}
+          onKeyPress={handleKeyPress}
         />
-        <button type="submit" onClick={handelSubmit}>Send</button>
       </div>
+      <button type="submit" className="send-button" onClick={handelSubmit}>
+        Send
+      </button>
     </>
   );
 };
