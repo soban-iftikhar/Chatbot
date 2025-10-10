@@ -1,6 +1,22 @@
 import React from "react";
+import { useState } from "react";
 
-const Input = () => {
+const Input = ({ onSubmit }) => {
+  const [inputValue, setInputValue] = useState("");
+
+  function getInputValue(event) {
+    const value = event.target.value;
+    setInputValue(value); 
+  }
+
+  function handelSubmit(event) {
+    event.preventDefault();
+    if (inputValue.trim() !== "") {
+      onSubmit(inputValue); 
+      setInputValue(""); 
+    }
+  }
+
   return (
     <>
       <div className="input-container">
@@ -9,8 +25,10 @@ const Input = () => {
           type="text"
           id="user-input"
           placeholder="Type your message here..."
+          value={inputValue}
+          onChange={getInputValue}
         />
-        <button type="submit">Send</button>
+        <button type="submit" onClick={handelSubmit}>Send</button>
       </div>
     </>
   );
